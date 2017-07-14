@@ -1,4 +1,6 @@
-# bento_hon
+bento_hon
+==================
+A collection of resources and recipes to make builders for bento
 
-TODO: Enter the cookbook description here.
-
+### Requirements
+Platform:  Ubuntu 16.04 or macOS 10.12

@@ -1,20 +1,18 @@
-name 'bento_hon'
-maintainer 'The Authors'
-maintainer_email 'you@example.com'
-license 'All Rights Reserved'
-description 'Installs/Configures bento_hon'
-long_description 'Installs/Configures bento_hon'
-version '0.1.0'
-chef_version '>= 12.1' if respond_to?(:chef_version)
+name             'bento'
+maintainer       'Seth Thomas'
+maintainer_email 'sthomas@chef.io'
+license          'Apache-2.0'
+description      'Sets up a bento builder'
+long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
+version          '0.1.0'
+chef_version     '>= 13'
 
-# The `issues_url` points to the location where issues for this cookbook are
-# tracked.  A `View Issues` link will be displayed on this cookbook's page when
-# uploaded to a Supermarket.
-#
-# issues_url 'https://github.com/<insert_org_here>/bento_hon/issues'
+issues_url       'https://github.com/cheeseplus/bento_hon'
+source_url       'https://github.com/cheeseplus/bento_hon/issues'
 
-# The `source_url` points to the development reposiory for this cookbook.  A
-# `View Source` link will be displayed on this cookbook's page when uploaded to
-# a Supermarket.
-#
-# source_url 'https://github.com/<insert_org_here>/bento_hon'
+%w(mac_os_x debian ubuntu).each do |os|
+  supports os
+end
+
+depends 'chef-ingredient'
+depends 'vagrant', '>= 0.7.1'

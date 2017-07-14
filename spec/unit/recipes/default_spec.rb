@@ -1,17 +1,19 @@
 #
-# Cookbook:: bento_hon
+# Cookbook:: bento
 # Spec:: default
 #
 # Copyright:: 2017, The Authors, All Rights Reserved.
 
 require 'spec_helper'
 
-describe 'bento_hon::default' do
+describe 'bento::default' do
   context 'When all attributes are default, on an Ubuntu 16.04' do
     let(:chef_run) do
       # for a complete list of available platforms and versions see:
       # https://github.com/customink/fauxhai/blob/master/PLATFORMS.md
-      runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04')
+      runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
+        node.normal['bento']['vmware_key'] = 'XXXXX-XXXXX-XXXXX-XXXXX-XXXXX'
+      end
       runner.converge(described_recipe)
     end
 
