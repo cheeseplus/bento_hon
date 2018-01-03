@@ -17,17 +17,26 @@ platforms:
 - name: macos-10.12
   attributes:
     bento:
+      user: vagrant
       vmware_key: <%= ENV["VMWARE_FUSION_KEY"] %>
+    vagrant:
+      version: '2.0.1'
+      checksum: '07f7be3a457a8422d576e6371c8499fbdea411b02aecc7ea3c5258494514c5f2'
+      url: 'https://releases.hashicorp.com/vagrant/2.0.1/vagrant_2.0.1_x86_64.dmg'
 - name: ubuntu-16.04
   attributes:
     bento:
+      user: vagrant
       vmware_key: <%= ENV["VMWARE_WORKSTATION_KEY"] %>
-
+    vagrant:
+      version: 
+      checksum: '2f9498a83b3d650fcfcfe0ec7971070fcd3803fad6470cf7da871caf2564d84f'
+      url:
 suites:
-  - name: default
-    run_list: bento
-    excludes: ["macos-10.12"]
-  - name: build-1604
-    run_list:
-      - bento_test
-    excludes: ["macos-10.12"]
+- name: default
+  run_list: bento
+  excludes: ["macos-10.12"]
+
+- name: build-1604
+  run_list: bento_test
+  excludes: ["macos-10.12"]

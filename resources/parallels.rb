@@ -15,9 +15,11 @@ action :install do
     pkg_name = "ParallelsDesktop-#{new_resource.version}.dmg"
     sdk_name = "ParallelsVirtualizationSDK-#{new_resource.version}-mac.dmg"
 
+    pkg_path = ::File.join(Chef::Config[:file_cache_path], pkg_name)
+
     [pkg_name, sdk_name].each do |f|
       remote_file f do
-        path File.join(Chef::Config[:file_cache_path], f)
+        path ::File.join(Chef::Config[:file_cache_path], f)
         source "#{base_url}/#{f}"
         action :create_if_missing
         notifies :run, 'execute[Mount Parallels .dmg package]', :immediately

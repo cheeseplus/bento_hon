@@ -6,6 +6,10 @@ property :license, String, required: true, sensitive: true
 property :version, String, name_property: true
 property :source_url, String, default: lazy { |r| "http://download3.vmware.com/software/fusion/file/VMware-Fusion-#{r.version}.dmg" }
 
+link '/usr/local/bin/vmrun' do
+  to '/Applications/VMware Fusion.app/Contents/Library/vmrun'
+end
+
 action :install do
   # borrowed from https://github.com/RoboticCheese/vmware-fusion-chef/blob/master/libraries/resource_vmware_fusion_config.rb#L44-L49
   execute 'init_fusion' do
