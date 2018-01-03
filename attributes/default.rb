@@ -18,14 +18,16 @@
 #
 
 default['bento'].tap do |v|
-  v['chefdk'] = '2.1.11'
-  v['packer'] = '1.0.4'
-  v['parallels'] = '12.2.1-41615'
-  v['vagrant'] = '1.9.7'
-  v['virtualbox'] = '5.1.26-117224'
+  v['user'] = 'build'
+  v['chefdk'] = '2.4.17'
+  v['packer'] = '1.1.3'
+  v['parallels'] = '13.2.0-43213'
+  v['vagrant'] = '2.0.1'
+  v['virtualbox'] = '5.2.4-119785'
+  v['ext_pack_license'] = '56be48f923303c8cababb0bb4c478284b688ed23f16d775d729b89a2e8e5f9eb'
   v['vmware'] = case node['platform']
                 when 'mac_os_x'
-                  '8.5.8-5824040'
+                  '10.1.0-7370838'
                 else
                   '12.5.7-5813279'
                 end

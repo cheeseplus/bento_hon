@@ -36,4 +36,21 @@ action :install do
       version "#{ver}~#{node['platform']}~#{node['lsb']['codename']}"
     end
   end
+
+  expk_name = "Oracle_VM_VirtualBox_Extension_Pack-#{ver}.vbox-extpack"
+  expk_path = ::File.join(Chef::Config[:file_cache_path], expk_name)
+
+  execute 'vbox_extpack_install' do
+    cwd Chef::Config[:file_cache_path]
+    command <<-EOH
+      VBoxManage extpack install #{expk_path} --replace --accept-license=#{node['bento']['ext_pack_license']}
+    EOH
+    action :nothing
+  end
+
+  remote_file expk_path do
+    source "http://download.virtualbox.org/virtualbox/#{semver}/#{expk_name}"
+    action :create_if_missing
+    notifies :run, 'execute[vbox_extpack_install]', :immediately
+  end
 end

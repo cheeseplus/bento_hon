@@ -1,24 +1,23 @@
 # tests for a bento builder
 
-describe package('git') do
-  it { should be_installed }
-end
-
-describe file('/usr/local/bin/packer') do
+describe command('git') do
   it { should exist }
-  it { should be_executable }
 end
 
-describe command('vagrant --version') do
-  its('stdout') { should match /Vagrant 1.9.7/ }
+describe command('/usr/local/bin/packer --version') do
+  its('stdout') { should match /1.1.1/ }
 end
 
-describe command('chef --version') do
-  its('stdout') { should match /Chef Development Kit Version: 1.5.0/ }
+describe command('/usr/local/bin/vagrant --version') do
+  its('stdout') { should match /2.0.0/ }
 end
 
-describe command('VBoxManage --version') do
-  its('stdout') { should match /5.1.22r115126/ }
+describe command('/opt/chefdk/bin/chef --version') do
+  its('stdout') { should match /2.3.4/ }
+end
+
+describe command('/usr/local/bin/vboxmanage --version') do
+  its('stdout') { should match /5.1.30r118389/ }
 end
 
 case os[:family]
@@ -28,12 +27,19 @@ when 'debian'
   end
 
   describe command('vmware --version') do
-    its('stdout') { should match /VMware Workstation 12.5.7 build-5813279/ }
+    its('stdout') { should match /12.5.7 build-5813279/ }
   end
-when 'mac_os_x'
-  path = File.join('/Applications/VMware\ Fusion.app/Contents/Library')
-  fusion_cmd = File.join(path, 'vmware-vmx -v')
-  describe command(fusion_cmd) do
-    its('stdout') { should match /VMware Fusion 8.5.8 build-5824040 Release/ }
+
+  describe command('vagrant plugin list') do
+    its('stdout') { should match /vagrant-vmware-workstation \(4.0.24\)/ }
+  end
+when 'darwin'
+  describe command('/Applications/VMware\ Fusion.app/Contents/Library/vmware-vmx -v') do
+    its('stderr') { should match /10.0.1 build-6754183/ }
+  end
+
+  describe command('/usr/local/bin/vagrant plugin list') do
+    its('stdout') { should match /vagrant-vmware-fusion \(5.0.0\)/ }
+    its('stdout') { should match /vagrant-parallels \(1.7.7\)/ }
   end
 end
