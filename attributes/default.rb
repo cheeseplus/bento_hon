@@ -23,13 +23,13 @@ default['bento'].tap do |v|
   v['packer'] = '1.1.3'
   v['parallels'] = '13.2.0-43213'
   v['vagrant'] = '2.0.1'
-  v['virtualbox'] = '5.2.4-119785'
+  v['virtualbox'] = '5.2.6-120293'
   v['ext_pack_license'] = '56be48f923303c8cababb0bb4c478284b688ed23f16d775d729b89a2e8e5f9eb'
   v['vmware'] = case node['platform']
                 when 'mac_os_x'
-                  '10.1.0-7370838'
+                  '10.1.1-7520154'
                 else
-                  '12.5.7-5813279'
+                  '14.1.1-7528167'
                 end
   v['vmware_key'] = nil
 end
